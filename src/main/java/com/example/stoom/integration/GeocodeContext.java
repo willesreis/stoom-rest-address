@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.PreDestroy;
+
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.errors.ApiException;
@@ -40,9 +42,9 @@ public class GeocodeContext {
         return location;
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
+    @PreDestroy
+    protected void destroy() {
         context.shutdown();
     }
+
 }
